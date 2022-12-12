@@ -53,7 +53,7 @@ def main() -> None:
 
     # word = input("Mata in ett fint namn: ")       # Gör samma sak som de två raderna ovan
     # print("Du matade in ordet: {}".format(word))
-
+    
     # word = input("Mata in ett ord: ")
     # print("Du matade in ordet: {}".format(word))
 
