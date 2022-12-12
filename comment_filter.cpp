@@ -38,16 +38,25 @@ int main(int argc, char** argv)
 
     result_file << '\n' <<"# Sorry for all the newlines above. My script \n# for removing only-comment-rows isn't very sophisticated." << endl;
 
+
+    bool prev_was_comment_row {false};
     while ( getline(in_file, buffer) )
     {
         if ( is_comment_row(buffer) )
         {
+            prev_was_comment_row = true;
             continue;
         }
 
-        result += buffer + "\n";
+        if ( prev_was_comment_row && buffer.empty() )
+        {
+            continue;
+        }
+
+        result += buffer + '\n';
         cout << buffer << endl;
         cout << "----------------------------------------------" << endl;
+        prev_was_comment_row = false;
     }
     result_file << result;
 
@@ -69,6 +78,11 @@ string construct_output_name(string const& filename)
 
 bool is_comment_row(string const& buffer)
 {
+    if ( buffer.empty() )
+    {
+        return false;
+    }
+
     auto start { begin(buffer) };
     auto last { end(buffer) };
     auto comment_sign { find(start, last, '#') };
