@@ -1,17 +1,16 @@
 #include <fstream>
 #include <iostream>
-#include <sstream>
 #include <string>
 #include <algorithm>
+#include <cctype>
 
 using namespace std;
 
 const string ALPHABET {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 
 string construct_output_name(string const& filename);
-
 bool is_comment_row(string const& buffer);
-
+bool contains_only_tab (string const& text);
 
 int main(int argc, char** argv)
 {
@@ -36,41 +35,68 @@ int main(int argc, char** argv)
     getline(in_file, buffer);
     result_file << buffer << "\n";
 
-    result_file << '\n' <<"# Sorry for all the newlines above. My script \n# for removing only-comment-rows isn't very sophisticated." << endl;
-
-
     bool prev_was_comment_row {false};
     while ( getline(in_file, buffer) )
     {
+        cout << endl;
         if ( is_comment_row(buffer) )
         {
             prev_was_comment_row = true;
             continue;
         }
 
-        if ( prev_was_comment_row && buffer.empty() )
+        if ( (prev_was_comment_row && buffer.empty()) || (prev_was_comment_row && contains_only_tab(buffer)) )
         {
             continue;
         }
 
         result += buffer + '\n';
-        cout << buffer << endl;
-        cout << "----------------------------------------------" << endl;
         prev_was_comment_row = false;
     }
     result_file << result;
 
     result_file.close();
     in_file.close();
-
     return 0;
+}
+
+// Checks if the line only contains tab.
+bool contains_only_tab (string const& text)
+{
+    bool contains_tab {false};
+    for (unsigned char letter : text)
+    {
+        if ( !isgraph(letter) )
+        {
+            contains_tab = true;
+            break;
+        }
+    }
+
+    if (!contains_tab)
+    {
+        return false;
+    }
+
+    // Finally if the line contains a tab and also if it finds a character it
+    // doesn't only contain a tab
+    for (unsigned char letter : text)
+    {
+        if ( isgraph(letter) )
+        {
+            return false;
+        }
+    }        
+
+    // Surely this line only contains a tab character (fingers crossed)
+    return true;   
 }
 
 string construct_output_name(string const& filename)
 {
-    auto dot { find(begin(filename), end(filename), '/') };
+    auto slash { find(begin(filename), end(filename), '/') };
     string result { "result_"};
-    string tmp { dot + 1, end(filename) };
+    string tmp { slash + 1, end(filename) };
     result += tmp;
     return result;
 }
