@@ -46,8 +46,6 @@ int main(int argc, char** argv)
         }
 
         result += buffer + "\n";
-        cout << buffer << endl;
-        cout << "----------------------------------------------" << endl;
     }
     result_file << result;
 
