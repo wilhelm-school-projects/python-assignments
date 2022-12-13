@@ -38,7 +38,6 @@ int main(int argc, char** argv)
     bool prev_was_comment_row {false};
     while ( getline(in_file, buffer) )
     {
-        cout << endl;
         if ( is_comment_row(buffer) )
         {
             prev_was_comment_row = true;
