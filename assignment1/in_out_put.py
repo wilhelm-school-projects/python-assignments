@@ -35,6 +35,7 @@
 #   dummy = 100000
 #   print("tal:{:10d}".format(dummy))
 
+#   "{1} {0}".format(arg0, arg1) för att indexera argumenten
 #   float_dummy = 10.42
 #   print("tal:{:8.3f}".format(float_dummy))        # <:> högerjusterat, <8> antal mellanslag, <.3> antal decimaler, <f> typen flyttal
 
@@ -48,39 +49,49 @@ def main() -> None:
     #print("Mata in ett fint namn: ", end = "")      # end = "" säger åt print att inte göra newline
     #name = input()                                  # Läser in från tangentbordsbufferten
     
-    line = []
-    # number = 0
+    line = ""
 
-    # line = input("Mata in ett fint namn: ")       # Gör samma sak som de två raderna ovan
-    # print("Du matade in ordet: {}".format(line))
-    
-    # line = input("Mata in ett ord: ")
-    # print("Du matade in ordet: {}".format(line))
+    line = input("Mata in ett fint namn: ")       # Gör samma sak som de två raderna ovan
+    print("Du matade in ordet: {}".format(line))
+    print()
 
-    # number = int( input("Mata in ett heltal: ") )
-    # number += 1
-    # print("Talet du matade in plus ett", number)
-    # print("Talet du matade in plus ett " + str(number))
-    # print("Talet du matade in plus ett {}".format(number))
+    line = input("Mata in ett ord: ").split()
+    print("Du matade in ordet: {}".format(line[0]))
+    print()
 
-    # line = input("Mata in två ord: ")
-    # if len(line) != 2:
-    #     print("Wrong number of words!")
-    #     return
-    # print("Du matade in orden |{}| och |{}|".format( line.split()[0], line.split()[ len(line.split()) - 1 ] ))
+    line = input("Mata in ett heltal: ").split()
+    print("Talet du matade in plus ett", int(line[0]) + 1)
+    print("Talet du matade in plus ett " + str(int(line[0]) + 1) )
+    print("Talet du matade in plus ett {}".format( str(int(line[0]) + 1) ))
+    print()
 
-    # line = input("Mata in fem heltal: ")
-    # print("Talen du matade in minus fem: {} {} {} {} {} ".format( int(line.split()[0]) + 5, int(line.split()[1]) + 5, int(line.split()[2]) + 5,
-    #                                                                 int(line.split()[3]) + 5, int(line.split()[4]) + 5, ))
+    line = input("Mata in två ord: ").split()
+    print("Du matade in orden |{}| och |{}|.".format( line[0], line[1] ))
+    print()
 
-    # # Det verkar som man måste ha alla om man ska ha någon ":", "0", "." och "f"
-    # line = input("Mata in ett flyttal: ")
-    # print("DU matade in flyttalet: {:0.3f}".format( float(line) ))    
+    line = input("Mata in fem heltal: ")
+    print("Talen du matade in minus fem: {} {} {} {} {} ".format( int(line.split()[0]) - 5, int(line.split()[1]) - 5, int(line.split()[2]) - 5,
+                                                                    int(line.split()[3]) - 5, int(line.split()[4]) - 5, ))
+    print()
+
+    # Det verkar som man måste ha alla om man ska ha någon ":", "0", "." och "f"
+    line = input("Mata in ett flyttal: ").split()
+    print("DU matade in flyttalet: {:0.3f}".format( float(line[0]) ))    
+    print()
 
     # Det går ju att köra split direkt också
     line = input("Mata in två heltal och ett flyttal: ").split()        
-    print("Input: {:7d}".format( int(line[0]) ))
-    print("Det andra heltalet var : {:7d}".format( int(line[1])), fill = "-")
-    print("Det första heltalet var: {:2.4f}".format( float(line[2]) ))
+    print("Det första heltalet var: {:8d}".format( int(line[0]) ))
+    print("Det andra heltalet var: {:.>8d}".format( int(line[1])))
+    print("Det första heltalet var: {:8.4f}".format( float(line[2]) ))
+    print()
+
+    line = input("Mata in ett heltal och ett ord: ").split()
+    print("Talet du matade in delat på två är |{}| och ordet var |{}|.".format( int(line[0]) // 2, line[1] ))
+    print()
+
+    line = input("Mata in ett ord och ett flyttal: ").split()
+    print("FLyttalet plus 2 är \"{:0.3f}\" och ordet är \"{}\"".format( float(line[1]) + 2, line[0] ))
+    print()
 
 main()
