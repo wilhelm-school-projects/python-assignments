@@ -118,7 +118,7 @@ bool is_comment_row(string const& buffer)
         return false;
     }
 
-    // Did find a alphabetic word before the comment sign '#' there is not comment_row 
+    // Did find a alphabetic word before the comment sign '#' therefore is not comment_row 
     auto result { find_first_of(start, comment_sign, begin(ALPHABET), end(ALPHABET) ) };
     if ( result != comment_sign )
     {
