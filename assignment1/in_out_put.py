@@ -4,6 +4,7 @@
 # 1. Säger vilken version av python vi ska köra och vart den finns i datorn
 # 2. Säger åt vilken teckenkodning som ska användas när vi kör programmet.
 
+
 # Kodstruktur
 #   import av bibliotek
 #   definitioner av underprogram
