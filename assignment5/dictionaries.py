@@ -1,9 +1,6 @@
 #!/usr/bin/python3.9
 
 
-
-
-
 def input_results(results : dict) -> None:
 
     name = input("Mata in namn: ")
@@ -23,15 +20,21 @@ def print_dictionaries(results : dict) -> None:
         print("Namn: {:.<10} - Poäng: {:.>10d}".format( key, results[key] ) )
 
 
-def find_leader(results : dict) -> dict:
+def find_leader(results : dict) -> tuple:
     
     sorted_by_hits = {}
-    print( results.values() )
+    sorted_values = sorted( results.values() )
+    print("sorted_values: ")
+    print(sorted_values)
+    for key in results:
+        if results[key] == sorted_values[-1]:
+            return (key , results[key])
+    return ('empty' , -1)
 
-    return {'none' : 0}
 
-def print_leader(leader : dict) -> None:
-    print(leader)
+def print_leader(leader : tuple) -> None:
+    key, value = leader
+    print("{} leder just nu med {} poäng".format( key, value ))
 
 def main() -> None:
     print("Minigolf!")
